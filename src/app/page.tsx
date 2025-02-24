@@ -1,24 +1,23 @@
 'use client';
 import { useMemo } from 'react';
-import { useSignal, initData, type User } from '@telegram-apps/sdk-react';
+import { useSignal, initData } from '@telegram-apps/sdk-react';
 import { AppRoot, Placeholder, Avatar, List, Text } from '@telegram-apps/telegram-ui';
 
 import '@telegram-apps/telegram-ui/dist/styles.css';
 
 
-function getUserRows(user: User) {
-  return [
-    { title: 'id', value: user.id.toString() },
-    { title: 'username', value: user.username },
-    { title: 'photo_url', value: user.photo_url },
-    { title: 'last_name', value: user.last_name },
-    { title: 'first_name', value: user.first_name },
-    { title: 'is_bot', value: user.is_bot },
-    { title: 'is_premium', value: user.is_premium },
-    { title: 'language_code', value: user.language_code },
-  ];
-}
-
+// function getUserRows(user: User) {
+//   return [
+//     { title: 'id', value: user.id.toString() },
+//     { title: 'username', value: user.username },
+//     { title: 'photo_url', value: user.photo_url },
+//     { title: 'last_name', value: user.last_name },
+//     { title: 'first_name', value: user.first_name },
+//     { title: 'is_bot', value: user.is_bot },
+//     { title: 'is_premium', value: user.is_premium },
+//     { title: 'language_code', value: user.language_code },
+//   ];
+// }
 
 export default function Home() {
   const initDataRaw = useSignal(initData.raw);
