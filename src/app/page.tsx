@@ -1,7 +1,7 @@
 'use client';
 import { useMemo } from 'react';
 import { useSignal, initData } from '@telegram-apps/sdk-react';
-import { Placeholder, Avatar, List, Text } from '@telegram-apps/telegram-ui';
+import { Placeholder, Avatar } from '@telegram-apps/telegram-ui';
 import { Page } from '@/shared/ui/Page';
 import Image from 'next/image';
 
@@ -53,9 +53,9 @@ export default function Home() {
   }, [initDataState, initDataRaw]);
 
 
-  console.log(initDataRaw)
-  console.log(initDataState)
-  console.log(initDataRows)
+  // const handleClick = (e: MouseEvent<HTMLFormElement>) => {
+  //   console.log(e.target);
+  // }
 
 
   if (!initDataRows) {
@@ -82,15 +82,11 @@ export default function Home() {
     >
       <Avatar src={initDataState?.user?.photoUrl} />
     </Placeholder>
-    <List>
-      {initDataRows.map(({ title, value }) => (
-        <Text key={title}>
-          <b>{title}</b>: {value
-            ? value.toString()
-            : '—'}
-        </Text>
-      ))}
-    </List>
+    {/* <Section>
+      <form onSubmit={handleClick}>
+      <Input header="Текст" placeholder="" />
+      </form>
+    </Section> */}
   </Page>
   );
 
