@@ -26,27 +26,27 @@ export default function Home() {
       return;
     }
     const {
-      auth_date,
+      authDate,
       hash,
-      query_id,
-      chat_type,
-      chat_instance,
+      queryId,
+      chatType,
+      chatInstance,
 
-      start_param,
+      startParam,
     } = initDataState;
     return [
       { title: 'raw', value: initDataRaw },
-      { title: 'auth_date', value: auth_date.toLocaleString() },
-      { title: 'auth_date (raw)', value: auth_date.getTime() / 1000 },
+      { title: 'auth_date', value: authDate.toLocaleString() },
+      { title: 'auth_date (raw)', value: authDate.getTime() / 1000 },
       { title: 'hash', value: hash },
       {
         title: 'can_send_after',
         value: initData.canSendAfterDate()?.toISOString(),
       },
-      { title: 'query_id', value: query_id },
-      { title: 'start_param', value: start_param },
-      { title: 'chat_type', value: chat_type },
-      { title: 'chat_instance', value: chat_instance },
+      { title: 'query_id', value: queryId },
+      { title: 'start_param', value: startParam },
+      { title: 'chat_type', value: chatType },
+      { title: 'chat_instance', value: chatInstance },
     ];
   }, [initDataState, initDataRaw]);
 
@@ -75,10 +75,10 @@ export default function Home() {
   return (
     <AppRoot>
     <Placeholder
-      header={`Привет, ${initDataState?.user?.first_name}!`}
+      header={`Привет, ${initDataState?.user?.firstName}!`}
       description="Это demo mini-app"
     >
-      <Avatar src={initDataState?.user?.photo_url} />
+      <Avatar src={initDataState?.user?.photoUrl} />
     </Placeholder>
     <List>
       {initDataRows.map(({ title, value }) => (
