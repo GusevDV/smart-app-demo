@@ -1,5 +1,5 @@
 import {
-    // backButton,
+    backButton,
     viewport,
     themeParams,
     miniApp,
@@ -20,7 +20,7 @@ import {
     initSDK();
   
     // Mount all components used in the project.
-    //backButton.isSupported() && backButton.mount();
+    backButton.isSupported() && backButton.mount();
     miniApp.mount();
     themeParams.mount();
     initData.restore();
