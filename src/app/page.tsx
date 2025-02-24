@@ -3,8 +3,6 @@ import { useMemo } from 'react';
 import { useSignal, initData } from '@telegram-apps/sdk-react';
 import { AppRoot, Placeholder, Avatar, List, Text } from '@telegram-apps/telegram-ui';
 
-import '@telegram-apps/telegram-ui/dist/styles.css';
-
 
 // function getUserRows(user: User) {
 //   return [
@@ -51,6 +49,11 @@ export default function Home() {
       { title: 'chat_instance', value: chat_instance },
     ];
   }, [initDataState, initDataRaw]);
+
+
+  console.log(initDataRaw)
+  console.log(initDataState)
+  console.log(initDataRows)
 
 
   if (!initDataRows) {
