@@ -60,7 +60,7 @@ export default function Home() {
 
   if (!initDataRows) {
     return (
-      <Page>
+      <Page back={false}>
         <Placeholder
           header="Ой"
           description="Приложение запущено вне Telegram"
@@ -75,7 +75,7 @@ export default function Home() {
     );
   }
   return (
-    <Page>
+    <Page back={false}>
     <Placeholder
       header={`Привет, ${initDataState?.user?.firstName}!`}
       description="Это demo mini-app"
