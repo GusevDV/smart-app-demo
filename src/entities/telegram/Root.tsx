@@ -2,7 +2,6 @@
 
 import { type PropsWithChildren } from 'react';
 import {
-  initData,
   miniApp,
   useLaunchParams,
   useSignal,
@@ -35,7 +34,7 @@ function RootInner({ children }: PropsWithChildren) {
   });
 
   const isDark = useSignal(miniApp.isDark);
-  const initDataUser = useSignal(initData.user);
+//   const initDataUser = useSignal(initData.user);
 
   // Set the user locale.
 //   useEffect(() => {

@@ -1,6 +1,3 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-// import "./globals.css";
 import '@telegram-apps/telegram-ui/dist/styles.css';
 import { Root } from "@/entities/telegram/Root";
 

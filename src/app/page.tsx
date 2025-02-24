@@ -1,8 +1,9 @@
 'use client';
 import { useMemo } from 'react';
 import { useSignal, initData } from '@telegram-apps/sdk-react';
-import { AppRoot, Placeholder, Avatar, List, Text } from '@telegram-apps/telegram-ui';
+import { Placeholder, Avatar, List, Text } from '@telegram-apps/telegram-ui';
 import { Page } from '@/shared/ui/Page';
+import Image from 'next/image';
 
 
 // function getUserRows(user: User) {
@@ -64,7 +65,7 @@ export default function Home() {
           header="Ой"
           description="Приложение запущено вне Telegram"
         >
-          <img
+          <Image
             alt="Telegram sticker"
             src="https://xelene.me/telegram.gif"
             style={{ display: 'block', width: '144px', height: '144px' }}
