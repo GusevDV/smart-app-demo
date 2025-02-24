@@ -2,6 +2,7 @@
 import { useMemo } from 'react';
 import { useSignal, initData } from '@telegram-apps/sdk-react';
 import { AppRoot, Placeholder, Avatar, List, Text } from '@telegram-apps/telegram-ui';
+import { Page } from '@/shared/ui/Page';
 
 
 // function getUserRows(user: User) {
@@ -58,7 +59,7 @@ export default function Home() {
 
   if (!initDataRows) {
     return (
-      <AppRoot>
+      <Page>
         <Placeholder
           header="Ой"
           description="Приложение запущено вне Telegram"
@@ -69,11 +70,11 @@ export default function Home() {
             style={{ display: 'block', width: '144px', height: '144px' }}
           />
         </Placeholder>
-      </AppRoot>
+      </Page>
     );
   }
   return (
-    <AppRoot>
+    <Page>
     <Placeholder
       header={`Привет, ${initDataState?.user?.firstName}!`}
       description="Это demo mini-app"
@@ -89,7 +90,7 @@ export default function Home() {
         </Text>
       ))}
     </List>
-  </AppRoot>
+  </Page>
   );
 
 }
