@@ -1,7 +1,7 @@
 'use client';
 import { useMemo } from 'react';
 import { useSignal, initData } from '@telegram-apps/sdk-react';
-import { Placeholder, Avatar } from '@telegram-apps/telegram-ui';
+import { Placeholder, Avatar, Section, Input } from '@telegram-apps/telegram-ui';
 import { Page } from '@/shared/ui/Page';
 import Image from 'next/image';
 
@@ -82,6 +82,18 @@ export default function Home() {
     >
       <Avatar src={initDataState?.user?.photoUrl} />
     </Placeholder>
+    <Section
+    footer="В списке содержится информация, которую получил MiniApp"
+    header="Информация"
+  >
+    {initDataRows.map(({ title, value }) => (
+      <Input key={title} header={title} placeholder={`${value}`} />
+    ))}
+    <Input
+      header="First name"
+      placeholder="21 y.o. designer from San Francisco"
+    />
+  </Section>
     {/* <Section>
       <form onSubmit={handleClick}>
       <Input header="Текст" placeholder="" />
