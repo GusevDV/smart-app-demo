@@ -1,95 +1,93 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+import { useMemo } from 'react';
+import { useSignal, initData, type User } from '@telegram-apps/sdk-react';
+import { AppRoot, Placeholder, Avatar, List, Text } from '@telegram-apps/telegram-ui';
+
+import '@telegram-apps/telegram-ui/dist/styles.css';
+
+
+function getUserRows(user: User) {
+  return [
+    { title: 'id', value: user.id.toString() },
+    { title: 'username', value: user.username },
+    { title: 'photo_url', value: user.photo_url },
+    { title: 'last_name', value: user.last_name },
+    { title: 'first_name', value: user.first_name },
+    { title: 'is_bot', value: user.is_bot },
+    { title: 'is_premium', value: user.is_premium },
+    { title: 'language_code', value: user.language_code },
+  ];
+}
+
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const initDataRaw = useSignal(initData.raw);
+  const initDataState = useSignal(initData.state);
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+  const initDataRows = useMemo(() => {
+    if (!initDataState || !initDataRaw) {
+      return;
+    }
+    const {
+      auth_date,
+      hash,
+      query_id,
+      chat_type,
+      chat_instance,
+
+      start_param,
+    } = initDataState;
+    return [
+      { title: 'raw', value: initDataRaw },
+      { title: 'auth_date', value: auth_date.toLocaleString() },
+      { title: 'auth_date (raw)', value: auth_date.getTime() / 1000 },
+      { title: 'hash', value: hash },
+      {
+        title: 'can_send_after',
+        value: initData.canSendAfterDate()?.toISOString(),
+      },
+      { title: 'query_id', value: query_id },
+      { title: 'start_param', value: start_param },
+      { title: 'chat_type', value: chat_type },
+      { title: 'chat_instance', value: chat_instance },
+    ];
+  }, [initDataState, initDataRaw]);
+
+
+  if (!initDataRows) {
+    return (
+      <AppRoot>
+        <Placeholder
+          header="Ой"
+          description="Приложение запущено вне Telegram"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+          <img
+            alt="Telegram sticker"
+            src="https://xelene.me/telegram.gif"
+            style={{ display: 'block', width: '144px', height: '144px' }}
           />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        </Placeholder>
+      </AppRoot>
+    );
+  }
+  return (
+    <AppRoot>
+    <Placeholder
+      header={`Привет, ${initDataState?.user?.first_name}!`}
+      description="Это demo mini-app"
+    >
+      <Avatar src={initDataState?.user?.photo_url} />
+    </Placeholder>
+    <List>
+      {initDataRows.map(({ title, value }) => (
+        <Text key={title}>
+          <b>{title}</b>: {value
+            ? value.toString()
+            : '—'}
+        </Text>
+      ))}
+    </List>
+  </AppRoot>
   );
+
 }
