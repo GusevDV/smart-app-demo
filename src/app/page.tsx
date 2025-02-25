@@ -87,12 +87,8 @@ export default function Home() {
     header="Информация"
   >
     {initDataRows.map(({ title, value }) => (
-      <Input key={title} header={title} placeholder={`${value}`} />
+      <Input key={title} header={title} value={`${value}`} />
     ))}
-    <Input
-      header="First name"
-      placeholder="21 y.o. designer from San Francisco"
-    />
   </Section>
     {/* <Section>
       <form onSubmit={handleClick}>
