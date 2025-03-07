@@ -139,9 +139,11 @@ export default function Home() {
               {data?.data?.balanceValue !== undefined ? `Баланс: ${data.data.balanceValue}` : ""}
             </Text>
           </div>
-          <Button type="submit" loading={isLoading} mode="filled" size="l" stretched>
-            Показать баланс
-          </Button>
+          <div style={{ padding: "0 22px" }}>
+            <Button type="submit" loading={isLoading} mode="filled" size="l" stretched>
+              Показать баланс
+            </Button>
+          </div>
         </form>
       </Section>
 
