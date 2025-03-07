@@ -1,23 +1,19 @@
-'use client';
+"use client";
 
-import { type PropsWithChildren } from 'react';
-import {
-  miniApp,
-  useLaunchParams,
-  useSignal,
-} from '@telegram-apps/sdk-react';
-import { AppRoot } from '@telegram-apps/telegram-ui';
+import { type PropsWithChildren } from "react";
+import { miniApp, useLaunchParams, useSignal } from "@telegram-apps/sdk-react";
+import { AppRoot } from "@telegram-apps/telegram-ui";
 
-import { ErrorBoundary } from '@/shared/ui/ErrorBoundary';
-import { ErrorPage } from '@/shared/ui/ErrorPage';
-import { useTelegramMock } from './lib/useTelegramMock';
-import { useDidMount } from './lib/useDidMount';
-import { useClientOnce } from './lib/useClientOnce';
+import { ErrorBoundary } from "@/shared/ui/ErrorBoundary";
+import { ErrorPage } from "@/shared/ui/ErrorPage";
+import { useTelegramMock } from "./lib/useTelegramMock";
+import { useDidMount } from "./lib/useDidMount";
+import { useClientOnce } from "./lib/useClientOnce";
 // import { setLocale } from '@/core/i18n/locale';
-import { init } from './lib/init';
+import { init } from "./lib/init";
 
 function RootInner({ children }: PropsWithChildren) {
-  const isDev = process.env.NODE_ENV === 'development';
+  const isDev = process.env.NODE_ENV === "development";
 
   // Mock Telegram environment in development mode if needed.
   if (isDev) {
@@ -26,7 +22,7 @@ function RootInner({ children }: PropsWithChildren) {
   }
 
   const lp = useLaunchParams();
-  const debug = isDev || lp.startParam === 'debug';
+  const debug = isDev || lp.startParam === "debug";
 
   // Initialize the library.
   useClientOnce(() => {
@@ -34,20 +30,20 @@ function RootInner({ children }: PropsWithChildren) {
   });
 
   const isDark = useSignal(miniApp.isDark);
-//   const initDataUser = useSignal(initData.user);
+  //   const initDataUser = useSignal(initData.user);
 
   // Set the user locale.
-//   useEffect(() => {
-//     initDataUser && setLocale(initDataUser.languageCode);
-//   }, [initDataUser]);
+  //   useEffect(() => {
+  //     initDataUser && setLocale(initDataUser.languageCode);
+  //   }, [initDataUser]);
 
   return (
-      <AppRoot
-        appearance={isDark ? 'dark' : 'light'}
-        platform={['macos', 'ios'].includes(lp.platform) ? 'ios' : 'base'}
-      >
-        {children}
-      </AppRoot>
+    <AppRoot
+      appearance={isDark ? "dark" : "light"}
+      platform={["macos", "ios"].includes(lp.platform) ? "ios" : "base"}
+    >
+      {children}
+    </AppRoot>
   );
 }
 
@@ -59,7 +55,9 @@ export function Root(props: PropsWithChildren) {
 
   return didMount ? (
     <ErrorBoundary fallback={ErrorPage}>
-      <RootInner {...props}/>
+      <RootInner {...props} />
     </ErrorBoundary>
-  ) : <div className="root__loading">Loading</div>;
+  ) : (
+    <div className="root__loading">Loading</div>
+  );
 }
