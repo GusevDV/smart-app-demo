@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useMemo } from "react";
 import { useSignal, initData, type User } from "@telegram-apps/sdk-react";
@@ -8,7 +8,6 @@ import {
   Placeholder,
   Section,
   Input,
-  Skeleton,
   Cell,
   Avatar,
   Button,
@@ -46,7 +45,11 @@ export default function Home() {
     token: "",
   });
 
-  const { register, handleSubmit } = useForm<Inputs>();
+  const { register, handleSubmit } = useForm<Inputs>({
+    defaultValues: {
+      ctn: typeof window !== "undefined" ? localStorage.getItem("ctn") || "" : "",
+    },
+  });
 
   const { data, error, isLoading, isError, isSuccess, refetch } = useBalance(formData, {
     enabled: !!formData.ctn && !!formData.token,
@@ -101,6 +104,7 @@ export default function Home() {
   }, [initDataState]);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
+    localStorage.setItem("ctn", data.ctn);
     setFormData(data);
     refetch();
   };
