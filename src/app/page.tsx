@@ -4,15 +4,7 @@ import { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useMemo } from "react";
 import { useSignal, initData, type User } from "@telegram-apps/sdk-react";
-import {
-  Placeholder,
-  Section,
-  Input,
-  Cell,
-  Avatar,
-  Button,
-  Text,
-} from "@telegram-apps/telegram-ui";
+import { Placeholder, Input, Cell, Avatar, Button, Text } from "@telegram-apps/telegram-ui";
 import { Page } from "@/shared/ui/Page";
 import Image from "next/image";
 import { useBalance } from "@/shared/api/balance";
@@ -130,7 +122,7 @@ export default function Home() {
       >
         <Avatar src={initDataState?.user?.photoUrl} />
       </Placeholder>
-      <Section>
+      <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input header="Token" {...register("token")} placeholder="" />
           <Input header="CTN (MSISDN)" {...register("ctn")} placeholder="" />
@@ -145,7 +137,7 @@ export default function Home() {
             </Button>
           </div>
         </form>
-      </Section>
+      </div>
 
       {isError && (
         <Cell readOnly subtitle="Error">
