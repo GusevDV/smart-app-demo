@@ -1,7 +1,7 @@
 "use client";
 
 import { type PropsWithChildren } from "react";
-import { miniApp, useLaunchParams, useSignal } from "@telegram-apps/sdk-react";
+import { miniApp, useSignal } from "@telegram-apps/sdk-react";
 import { AppRoot } from "@telegram-apps/telegram-ui";
 
 import { ErrorBoundary } from "@/shared/ui/ErrorBoundary";
@@ -11,6 +11,7 @@ import { useDidMount } from "./lib/useDidMount";
 import { useClientOnce } from "./lib/useClientOnce";
 // import { setLocale } from '@/core/i18n/locale';
 import { init } from "./lib/init";
+import { useLaunchParams } from "./lib/useLaunchParams";
 
 function RootInner({ children }: PropsWithChildren) {
   const isDev = process.env.NODE_ENV === "development";
@@ -40,7 +41,7 @@ function RootInner({ children }: PropsWithChildren) {
   return (
     <AppRoot
       appearance={isDark ? "dark" : "light"}
-      platform={["macos", "ios"].includes(lp.platform) ? "ios" : "base"}
+      platform={["macos", "ios"].includes(lp.tgWebAppPlatform) ? "ios" : "base"}
     >
       {children}
     </AppRoot>

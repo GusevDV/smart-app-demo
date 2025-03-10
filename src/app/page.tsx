@@ -19,12 +19,12 @@ function getUserRows(user: User) {
   return [
     { title: "id", value: user.id.toString() },
     { title: "username", value: user.username },
-    { title: "photo_url", value: user.photoUrl },
-    { title: "last_name", value: user.lastName },
-    { title: "first_name", value: user.firstName },
-    { title: "is_bot", value: user.isBot },
-    { title: "is_premium", value: user.isPremium },
-    { title: "language_code", value: user.languageCode },
+    { title: "photo_url", value: user.photo_url },
+    { title: "last_name", value: user.last_name },
+    { title: "first_name", value: user.first_name },
+    { title: "is_bot", value: user.is_bot },
+    { title: "is_premium", value: user.is_premium },
+    { title: "language_code", value: user.language_code },
   ].filter((element) => !!element.value);
 }
 
@@ -51,28 +51,20 @@ export default function Home() {
     if (!initDataState || !initDataRaw) {
       return;
     }
-    const {
-      authDate,
-      hash,
-      queryId,
-      chatType,
-      chatInstance,
-
-      startParam,
-    } = initDataState;
+    const { auth_date, hash, query_id, chat_type, chat_instance, start_param } = initDataState;
     return [
       { title: "raw", value: initDataRaw },
-      { title: "auth_date", value: authDate.toLocaleString() },
-      { title: "auth_date (raw)", value: authDate.getTime() / 1000 },
+      { title: "auth_date", value: auth_date.toLocaleString() },
+      { title: "auth_date (raw)", value: auth_date.getTime() / 1000 },
       { title: "hash", value: hash },
       {
         title: "can_send_after",
         value: initData.canSendAfterDate()?.toISOString(),
       },
-      { title: "query_id", value: queryId },
-      { title: "start_param", value: startParam },
-      { title: "chat_type", value: chatType },
-      { title: "chat_instance", value: chatInstance },
+      { title: "query_id", value: query_id },
+      { title: "start_param", value: start_param },
+      { title: "chat_type", value: chat_type },
+      { title: "chat_instance", value: chat_instance },
     ].filter((element) => !!element.value);
   }, [initDataState, initDataRaw]);
 
@@ -80,14 +72,14 @@ export default function Home() {
     if (!initDataState?.chat) {
       return;
     }
-    const { id, title, type, username, photoUrl } = initDataState.chat;
+    const { id, title, type, username, photo_url } = initDataState.chat;
 
     return [
       { title: "id", value: id.toString() },
       { title: "title", value: title },
       { title: "type", value: type },
       { title: "username", value: username },
-      { title: "photo_url", value: photoUrl },
+      { title: "photo_url", value: photo_url },
     ].filter((element) => !!element.value);
   }, [initData]);
 
@@ -117,10 +109,10 @@ export default function Home() {
   return (
     <Page back={false}>
       <Placeholder
-        header={`Привет, ${initDataState?.user?.firstName}!`}
+        header={`Привет, ${initDataState?.user?.first_name}!`}
         description="Это demo mini-app"
       >
-        <Avatar src={initDataState?.user?.photoUrl} />
+        <Avatar src={initDataState?.user?.photo_url} />
       </Placeholder>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
