@@ -19,10 +19,12 @@ import {
     // Mount all components used in the project.
     backButton.isSupported() && backButton.mount();
     miniApp.mount();
-    themeParams.mount();
+    //themeParams.mount();
     initData.restore();
     void viewport.mount().then(() => {
       viewport.bindCssVars();
+      miniApp.bindCssVars();
+      themeParams.bindCssVars();
     }).catch(e => {
       console.error('Something went wrong mounting the viewport', e);
     });
