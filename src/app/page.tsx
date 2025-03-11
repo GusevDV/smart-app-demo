@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useMemo } from "react";
 import { useSignal, initData, type User } from "@telegram-apps/sdk-react";
-import { Placeholder, Input, Cell, Avatar, Button, Text } from "@telegram-apps/telegram-ui";
+import { Placeholder, Input, Avatar, Button, Text } from "@telegram-apps/telegram-ui";
 import { Page } from "@/shared/ui/Page";
 import Image from "next/image";
 import { useBalance } from "@/shared/api/balance";

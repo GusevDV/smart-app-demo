@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { getAuthData } from "@/entities/auth";
-import { useBalance } from "@/shared/api/balance";
 import { Page } from "@/shared/ui/Page";
 import { Text, Cell } from "@telegram-apps/telegram-ui";
 import Link from "next/link";
@@ -14,7 +13,7 @@ export default function SbpPage() {
   const { mutate, data, error, isPending, isError, isSuccess } = useSbpPay({
     token: token ?? "",
     ctn: ctn ?? "",
-    amount: 1.0,
+    amount: 10,
   });
 
   useEffect(() => {
@@ -25,7 +24,7 @@ export default function SbpPage() {
     <Page back={true}>
       {isPending && <Text>Loading...</Text>}
       {isError && <Text>Error: {error.message}</Text>}
-      {isSuccess && <Link href={data.data.payLoad}>Dashboard</Link>}
+      {isSuccess && <Link href={data.data.payLoad}>Оплатить</Link>}
     </Page>
   );
 }
