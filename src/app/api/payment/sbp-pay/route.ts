@@ -29,7 +29,7 @@ export async function POST(request: Request) {
 
   const { amount } = parsedBody.data;
 
-  const response = await fetch(`${process.env.EXTERNAL_API_DOMAIN}/api/v1/payment/sbpPay?ctn=${xCtn}`, {
+  const response = await fetch(`${process.env.EXTERNAL_API_DOMAIN}/mobile/api/v2/payment/sbpPay?ctn=${xCtn}`, {
     method: 'POST',
     headers: {
       "X-idp-id-token": xIdp,
