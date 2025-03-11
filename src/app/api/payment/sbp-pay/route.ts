@@ -34,10 +34,11 @@ export async function POST(request: Request) {
     headers: {
       "X-idp-id-token": xIdp,
       "X-CTN": xCtn,
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      "createBinding": false,
-      "amount": amount
+      createBinding: false,
+      amount: amount
     })
   });
 
