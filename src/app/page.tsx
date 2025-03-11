@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useMemo } from "react";
 import { useSignal, initData, type User } from "@telegram-apps/sdk-react";
@@ -9,6 +9,8 @@ import { Page } from "@/shared/ui/Page";
 import Image from "next/image";
 import { useBalance } from "@/shared/api/balance";
 import { BalanceRequest } from "@/shared/api/balance/balance";
+import { saveAuthData } from "@/entities/auth";
+import { useRouter } from "next/navigation";
 
 type Inputs = {
   token: string;
@@ -87,10 +89,13 @@ export default function Home() {
     return initDataState && initDataState.user ? getUserRows(initDataState.user) : undefined;
   }, [initDataState]);
 
+  const router = useRouter();
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    localStorage.setItem("ctn", data.ctn);
+    saveAuthData(data);
     setFormData(data);
     refetch();
+    router.push("/sbp");
   };
 
   if (!initDataRows) {
@@ -131,11 +136,11 @@ export default function Home() {
         </form>
       </div>
 
-      {isError && (
+      {/* {isError && (
         <Cell readOnly subtitle="Error">
           Error: {error.message}
         </Cell>
-      )}
+      )} */}
     </Page>
   );
 }

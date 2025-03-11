@@ -1,3 +1,5 @@
+'use client'
+
 import {
     backButton,
     viewport,
@@ -5,12 +7,16 @@ import {
     miniApp,
     initData,
     init as initSDK,
+    setDebug,
   } from '@telegram-apps/sdk-react';
 
   /**
    * Initializes the application and configures its dependencies.
    */
   export function init(debug: boolean): void {
+
+    // Set @telegram-apps/sdk-react debug mode.
+    setDebug(debug);
 
     // Initialize special event handlers for Telegram Desktop, Android, iOS, etc.
     // Also, configure the package.

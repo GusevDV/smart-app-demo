@@ -37,7 +37,7 @@ async function fetchBalance(data: BalanceRequest): Promise<BalanceResponse> {
   });
 
   if (!response.ok) {
-    throw new Error(`Ошибка при запросе балансе. Статус: ${response.status}`);
+    throw new Error(`Ошибка. Статус: ${response.status}`);
   }
 
   return response.json();
