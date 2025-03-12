@@ -30,13 +30,11 @@ export default function SbpPage() {
     <Page back={true}>
       {isPending && <Text>Loading...</Text>}
       {isError && <Text>Error: {error.message}</Text>}
-      {isSuccess && (
-        <div style={{ padding: "0 22px" }}>
-          <Button onClick={handleClick} loading={isPending} mode="filled" size="l" stretched>
-            Показать баланс
-          </Button>
-        </div>
-      )}
+      <div style={{ padding: "0 22px" }}>
+        <Button onClick={handleClick} loading={isPending} mode="filled" size="l" stretched>
+          Оплатить
+        </Button>
+      </div>
     </Page>
   );
 }
