@@ -1,9 +1,7 @@
 "use client";
 
 import { type PropsWithChildren } from "react";
-import { miniApp, useSignal } from "@telegram-apps/sdk-react";
 import { AppRoot } from "@telegram-apps/telegram-ui";
-
 import { ErrorBoundary } from "@/shared/ui/ErrorBoundary";
 import { ErrorPage } from "@/shared/ui/ErrorPage";
 import { useTelegramMock } from "./lib/useTelegramMock";
@@ -30,7 +28,6 @@ function RootInner({ children }: PropsWithChildren) {
     init(debug);
   });
 
-  const isDark = useSignal(miniApp.isDark);
   //   const initDataUser = useSignal(initData.user);
 
   // Set the user locale.

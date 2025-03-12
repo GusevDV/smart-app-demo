@@ -4,7 +4,16 @@ import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useMemo } from "react";
 import { useSignal, initData, type User } from "@telegram-apps/sdk-react";
-import { Placeholder, Input, Avatar, Button, Text } from "@telegram-apps/telegram-ui";
+import {
+  Placeholder,
+  Input,
+  Avatar,
+  Button,
+  Text,
+  Section,
+  List,
+  ButtonCell,
+} from "@telegram-apps/telegram-ui";
 import { Page } from "@/shared/ui/Page";
 import Image from "next/image";
 import { useBalance } from "@/shared/api/balance";
@@ -94,7 +103,9 @@ export default function Home() {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     saveAuthData(data);
     setFormData(data);
-    refetch();
+  };
+
+  const handleSbpClick = () => {
     router.push("/sbp");
   };
 
@@ -119,28 +130,31 @@ export default function Home() {
       >
         <Avatar src={initDataState?.user?.photo_url} />
       </Placeholder>
-      <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Input header="Token" {...register("token")} placeholder="" />
-          <Input header="CTN (MSISDN)" {...register("ctn")} placeholder="" />
-          <div style={{ display: "flex", padding: "0 22px 16px 22px", textAlign: "left" }}>
-            <Text weight="3">
-              {data?.data?.balanceValue !== undefined ? `Баланс: ${data.data.balanceValue}` : ""}
-            </Text>
-          </div>
-          <div style={{ padding: "0 22px" }}>
-            <Button type="submit" loading={isLoading} mode="filled" size="l" stretched>
-              Показать баланс
-            </Button>
-          </div>
-        </form>
-      </div>
+      <List
+        style={{
+          padding: "40px",
+        }}
+      >
+        <div>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Input header="Token" {...register("token")} placeholder="" />
+            <Input header="CTN (MSISDN)" {...register("ctn")} placeholder="" />
+            <div style={{ display: "flex", padding: "0 22px 16px 22px", textAlign: "left" }}>
+              <Text weight="3">
+                {data?.data?.balanceValue !== undefined ? `Баланс: ${data.data.balanceValue}` : ""}
+              </Text>
+            </div>
 
-      {/* {isError && (
-        <Cell readOnly subtitle="Error">
-          Error: {error.message}
-        </Cell>
-      )} */}
+            <Button type="submit" loading={isLoading} mode="filled" size="l" stretched>
+              Сохранить токен
+            </Button>
+          </form>
+        </div>
+        <Section header="Действия">
+          <ButtonCell onClick={handleSbpClick}>СБП</ButtonCell>
+          <ButtonCell>Внешние сервисы</ButtonCell>
+        </Section>
+      </List>{" "}
     </Page>
   );
 }

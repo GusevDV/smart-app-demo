@@ -1,30 +1,42 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { getAuthData } from "@/entities/auth";
 import { Page } from "@/shared/ui/Page";
-import { Text, Cell } from "@telegram-apps/telegram-ui";
-import Link from "next/link";
+import { Text, Button } from "@telegram-apps/telegram-ui";
 import { useSbpPay } from "@/shared/api/payment/sbpPay";
+import { openLink } from "@telegram-apps/sdk-react";
 
 export default function SbpPage() {
   const { token, ctn } = getAuthData();
 
-  const { mutate, data, error, isPending, isError, isSuccess } = useSbpPay({
+  const { mutateAsync, data, error, isPending, isError, isSuccess } = useSbpPay({
     token: token ?? "",
     ctn: ctn ?? "",
     amount: 10,
   });
 
-  useEffect(() => {
-    mutate();
-  }, []);
+  const handleClick = async () => {
+    const response = await mutateAsync();
+    response.data;
+    if (openLink.isAvailable()) {
+      openLink(response.data.payId, {
+        tryBrowser: "chrome",
+        tryInstantView: true,
+      });
+    }
+  };
 
   return (
     <Page back={true}>
       {isPending && <Text>Loading...</Text>}
       {isError && <Text>Error: {error.message}</Text>}
-      {isSuccess && <Link href={data.data.payLoad}>Оплатить</Link>}
+      {isSuccess && (
+        <div style={{ padding: "0 22px" }}>
+          <Button onClick={handleClick} loading={isPending} mode="filled" size="l" stretched>
+            Показать баланс
+          </Button>
+        </div>
+      )}
     </Page>
   );
 }
