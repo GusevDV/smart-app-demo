@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/api/',
-        destination: `${process.env.EXTERNAL_API_DOMAIN}/mobile/api/`,
+        destination: `/mobile/api/`,
       },
     ]
   },
