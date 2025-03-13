@@ -33,10 +33,9 @@ async function fetchBalance() {
   }
 }
 
-export function useBalance(options: { enabled: boolean }) {
+export function useBalance() {
   return useQuery({
     queryKey: ['balance'],
     queryFn: () => fetchBalance(),
-    enabled: options?.enabled
   })
 }

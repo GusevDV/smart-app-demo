@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useSignal, initData, type User } from '@telegram-apps/sdk-react';
 import {
@@ -41,17 +41,13 @@ export default function Home() {
   const initDataRaw = useSignal(initData.raw);
   const initDataState = useSignal(initData.state);
 
-  const [isAuth, setIsAuth] = useState(false);
-
   const { register, handleSubmit } = useForm<Inputs>({
     defaultValues: {
       ctn: typeof window !== 'undefined' ? localStorage.getItem('ctn') || '' : '',
     },
   });
 
-  const { data, isLoading } = useBalance({
-    enabled: isAuth,
-  });
+  const { data, isLoading } = useBalance();
 
   const initDataRows = useMemo(() => {
     if (!initDataState || !initDataRaw) {
@@ -97,7 +93,6 @@ export default function Home() {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     saveAuthData(data);
-    setIsAuth(true);
   };
 
   const handleSbpClick = () => {

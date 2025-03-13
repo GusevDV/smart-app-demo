@@ -42,8 +42,8 @@ async function sbpPay(request: SbpPayRequest): Promise<SbpPayResponse> {
 }
 
 
-export function useSbpPay(data: SbpPayRequest) {
-  return useMutation<SbpPayResponse, AxiosError | Error>({
-    mutationFn: () => sbpPay(data),
+export function useSbpPay() {
+  return useMutation<SbpPayResponse, AxiosError | Error, SbpPayRequest>({
+    mutationFn: sbpPay,
   })
 }
