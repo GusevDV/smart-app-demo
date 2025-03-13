@@ -14,7 +14,7 @@ export default function SbpPage() {
     <Page back={true}>
       <Skeleton visible={isLoading}>
         {isSuccess ? (
-          <Cell subtitle={`Баланс: ${data?.data.balanceValue}`}>Номер: ${authData?.ctn}</Cell>
+          <Cell subtitle={`Баланс: ${data?.data.balanceValue}`}>Номер: {authData?.ctn}</Cell>
         ) : (
           <Cell subtitle={balanceError?.message}>Ошибка</Cell>
         )}

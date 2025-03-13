@@ -39,7 +39,6 @@ export default function Home() {
           style={{
             backgroundColor: 'var(--tgui--section_bg_color)',
             borderRadius: '10px',
-            color: '#fff',
           }}
           after={
             <svg
@@ -69,7 +68,6 @@ export default function Home() {
           style={{
             backgroundColor: 'var(--tgui--section_bg_color)',
             borderRadius: '10px',
-            color: '#fff',
           }}
           after={
             <svg
@@ -90,7 +88,7 @@ export default function Home() {
           }
           before={
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="44" height="44">
-              <circle cx="50" cy="50" r="48" fill="#4A90E2" stroke="#FFFFFF" stroke-width="4" />
+              <circle cx="50" cy="50" r="48" fill="#4A90E2" stroke="#FFFFFF" strokeWidth="4" />
               <rect x="20" y="35" width="60" height="30" rx="5" ry="5" fill="#FFFFFF" />
               <rect x="20" y="40" width="60" height="5" fill="#4A90E2" />
               <rect x="25" y="55" width="15" height="5" fill="#4A90E2" />

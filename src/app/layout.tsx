@@ -1,3 +1,4 @@
+'use client';
 import { ReactNode } from 'react';
 import { Root } from '@/entities/telegram/ui/Root';
 import { ReactQueryProvider } from '@/shared/api';
