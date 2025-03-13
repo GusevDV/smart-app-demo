@@ -1,2 +1,2 @@
 export { useBalance } from './balance';
-export type { BalanceRequest, BalanceResponse } from './balance';
+export type { BalanceResponse } from './balance';

@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { type PropsWithChildren } from "react";
-import { AppRoot } from "@telegram-apps/telegram-ui";
-import { ErrorBoundary } from "@/shared/ui/ErrorBoundary";
-import { ErrorPage } from "@/shared/ui/ErrorPage";
-import { useTelegramMock } from "./lib/useTelegramMock";
-import { useDidMount } from "./lib/useDidMount";
-import { useClientOnce } from "./lib/useClientOnce";
+import { type PropsWithChildren } from 'react';
+import { AppRoot } from '@telegram-apps/telegram-ui';
+import { ErrorBoundary } from '@/shared/ui/ErrorBoundary';
+import { ErrorPage } from '@/shared/ui/ErrorPage';
+import { useTelegramMock } from './lib/useTelegramMock';
+import { useDidMount } from './lib/useDidMount';
+import { useClientOnce } from './lib/useClientOnce';
 // import { setLocale } from '@/core/i18n/locale';
-import { init } from "./lib/init";
-import { useLaunchParams } from "./lib/useLaunchParams";
+import { init } from './lib/init';
+import { useLaunchParams } from './lib/useLaunchParams';
 
 function RootInner({ children }: PropsWithChildren) {
-  const isDev = process.env.NODE_ENV === "development";
+  const isDev = process.env.NODE_ENV === 'development';
 
   // Mock Telegram environment in development mode if needed.
   if (isDev) {
@@ -21,7 +21,7 @@ function RootInner({ children }: PropsWithChildren) {
   }
 
   const lp = useLaunchParams();
-  const debug = isDev || lp.startParam === "debug";
+  const debug = isDev || lp.startParam === 'debug';
 
   // Initialize the library.
   useClientOnce(() => {

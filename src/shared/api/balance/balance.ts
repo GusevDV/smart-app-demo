@@ -1,9 +1,5 @@
-import { useQuery, UseQueryOptions } from "@tanstack/react-query";
-
-export type BalanceRequest = {
-    token: string;
-    ctn: string;
-}
+import { httpClient } from '../baseQuery'
+import { useQuery } from "@tanstack/react-query";
 
 export type BalanceResponse = {
   data: {
@@ -28,25 +24,19 @@ export type BalanceResponse = {
   }
 }
 
-async function fetchBalance(data: BalanceRequest): Promise<BalanceResponse> {
-  const response = await fetch("/api/balance", {
-    headers: {
-      "X-idp-id-token": data.token,
-      "X-CTN": data.ctn,
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error(`Ошибка. Статус: ${response.status}`);
+async function fetchBalance() {
+  try {
+    const response = await httpClient.get<BalanceResponse>("/v1/balance/main");
+    return response.data;
+  } catch (error) {
+    throw error;
   }
-
-  return response.json();
 }
 
-export function useBalance(data: BalanceRequest, options: {enabled: boolean}) {
-    return useQuery({
-      queryKey: ['balance'],
-      queryFn: () => fetchBalance(data),
-      enabled: options?.enabled
-    })
+export function useBalance(options: { enabled: boolean }) {
+  return useQuery({
+    queryKey: ['balance'],
+    queryFn: () => fetchBalance(),
+    enabled: options?.enabled
+  })
 }

@@ -1,17 +1,12 @@
-"use client";
+'use client';
 
-import { getAuthData } from "@/entities/auth";
-import { Page } from "@/shared/ui/Page";
-import { Text, Button } from "@telegram-apps/telegram-ui";
-import { useSbpPay } from "@/shared/api/payment/sbpPay";
-import { openLink } from "@telegram-apps/sdk-react";
+import { Page } from '@/shared/ui/Page';
+import { Text, Button } from '@telegram-apps/telegram-ui';
+import { useSbpPay } from '@/shared/api/payment/sbp-pay';
+import { openLink } from '@telegram-apps/sdk-react';
 
 export default function SbpPage() {
-  const { token, ctn } = getAuthData();
-
   const { mutateAsync, data, error, isPending, isError, isSuccess } = useSbpPay({
-    token: token ?? "",
-    ctn: ctn ?? "",
     amount: 10,
   });
 
@@ -22,7 +17,7 @@ export default function SbpPage() {
     console.log(response);
     if (openLink.isAvailable()) {
       openLink(response.data.payLoad, {
-        tryBrowser: "chrome",
+        tryBrowser: 'chrome',
         tryInstantView: true,
       });
     }
@@ -32,7 +27,7 @@ export default function SbpPage() {
     <Page back={true}>
       {isPending && <Text>Loading...</Text>}
       {isError && <Text>Error: {error.message}</Text>}
-      <div style={{ padding: "0 22px" }}>
+      <div style={{ padding: '0 22px' }}>
         <Button onClick={handleClick} loading={isPending} mode="filled" size="l" stretched>
           Оплатить
         </Button>

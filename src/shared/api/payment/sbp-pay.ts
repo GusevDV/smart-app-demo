@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
+import { httpClient } from "../baseQuery";
+import { AxiosError } from "axios";
 
 export type SbpPayRequest = {
-  token: string;
-  ctn: string;
   amount: number;
 }
 
@@ -22,28 +22,20 @@ export type SbpPayResponse = {
   }
 }
 
-async function sbpPay(data: SbpPayRequest): Promise<SbpPayResponse> {
-  const response = await fetch("/api/payment/sbp-pay", {
-    method: "POST",
-    headers: {
-      "X-idp-id-token": data.token,
-      "X-CTN": data.ctn,
-    },
-    body: JSON.stringify({
-      amount: data.amount
-    })
-  });
-
-  if (!response.ok) {
-    throw new Error(`Ошибка. Статус: ${response.status}`);
+async function sbpPay(request: SbpPayRequest): Promise<SbpPayResponse> {
+  try {
+    const response = await httpClient.post<SbpPayResponse>("/v2/payment/sbpPay?ctn=${xCtn}", {
+      amount: request.amount
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
   }
-
-  return response.json();
 }
 
 
 export function useSbpPay(data: SbpPayRequest) {
-  return useMutation({
+  return useMutation<SbpPayResponse, AxiosError | Error>({
     mutationFn: () => sbpPay(data),
   })
 }
