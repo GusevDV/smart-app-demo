@@ -8,6 +8,7 @@ import { openLink } from '@telegram-apps/sdk-react';
 export default function SbpPage() {
   const { mutateAsync, data, error, isPending, isError, isSuccess } = useSbpPay({
     amount: 10,
+    createBinding: false,
   });
 
   const handleClick = async () => {
