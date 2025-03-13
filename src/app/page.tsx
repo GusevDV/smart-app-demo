@@ -139,7 +139,11 @@ export default function Home() {
                 {data?.data.balanceValue !== undefined ? `Баланс: ${data?.data.balanceValue}` : ''}
               </Text>
             </div>
-
+            <div style={{ display: 'flex', padding: '0 22px 16px 22px', textAlign: 'left' }}>
+              <Text weight="3">
+                {data?.data.balanceValue !== undefined ? `Баланс: ${data?.data.balanceValue}` : ''}
+              </Text>
+            </div>
             <Button type="submit" loading={isLoading} mode="filled" size="l" stretched>
               Сохранить токен
             </Button>
