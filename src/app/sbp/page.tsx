@@ -9,8 +9,8 @@ export default function SbpPage() {
   const { mutateAsync, data, error, isPending, isError, isSuccess } = useSbpPay({
     amount: 10,
     createBinding: false,
-    hasBonuses: false,
     bindingId: null,
+    hasBonuses: false,
   });
 
   const handleClick = async () => {
@@ -19,10 +19,7 @@ export default function SbpPage() {
     console.log(openLink.isAvailable());
     console.log(response);
     if (openLink.isAvailable()) {
-      openLink(response.data.payLoad, {
-        tryBrowser: 'chrome',
-        tryInstantView: true,
-      });
+      openLink(response.data.payLoad);
     }
   };
 
