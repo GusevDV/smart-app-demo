@@ -15,6 +15,7 @@ const createClient = () => {
       "X-CTN": authData.ctn,
     }
   }
+  console.log(headers);
 
   return axios.create({
     baseURL: API_PATH,

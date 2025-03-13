@@ -1,8 +1,14 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useSignal, initData, type User } from '@telegram-apps/sdk-react';
+import {
+  useSignal,
+  initData,
+  type User,
+  requestPhoneAccess,
+  requestContact,
+} from '@telegram-apps/sdk-react';
 import {
   Placeholder,
   Input,
