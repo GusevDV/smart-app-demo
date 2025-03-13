@@ -17,14 +17,14 @@ export async function middleware(request: NextRequest) {
 
     const targetUrl = `${externalApiDomain}${url.pathname}${url.search}`;
 
-    const body = request.body ? JSON.stringify(request.body) : undefined;
+    const body = request.body ? await request.json() : undefined;
 
     console.log('proxy-request', {
       targetUrl,
       method: request.method,
       headers: request.headers,
       body,
-    })
+    });
 
     try {
       const response = await fetch(targetUrl, {
@@ -34,12 +34,17 @@ export async function middleware(request: NextRequest) {
           "X-CTN": xCtn,
           'Content-Type': 'application/json'
         },
-        body: body,
+        body: body ? JSON.stringify(body) : undefined,
       });
 
-      console.log('proxy-response', response);
+      const responseBody = await response.json();
 
-      return new NextResponse(response.body, {
+      console.log('proxy-response', {
+        status: response.status,
+        body: responseBody,
+      });
+
+      return NextResponse.json(responseBody, {
         status: response.status,
         headers: response.headers,
       });

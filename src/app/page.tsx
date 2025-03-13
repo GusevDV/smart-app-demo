@@ -1,8 +1,14 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useSignal, initData, type User } from '@telegram-apps/sdk-react';
+import {
+  useSignal,
+  initData,
+  type User,
+  requestPhoneAccess,
+  requestContact,
+} from '@telegram-apps/sdk-react';
 import {
   Placeholder,
   Input,
@@ -48,6 +54,15 @@ export default function Home() {
       ctn: typeof window !== 'undefined' ? localStorage.getItem('ctn') || '' : '',
     },
   });
+
+  useEffect(() => {
+    requestPhoneAccess().then((d) => {
+      console.log(d);
+    });
+    requestContact().then((contact) => {
+      console.log(contact);
+    });
+  }, []);
 
   const { data, isLoading } = useBalance({
     enabled: isAuth,
