@@ -1,4 +1,5 @@
 'use client';
+
 import { useSignal, initData, type User } from '@telegram-apps/sdk-react';
 import './header.css';
 import { Avatar, Divider, Text } from '@telegram-apps/telegram-ui';

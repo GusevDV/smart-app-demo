@@ -42,7 +42,7 @@ function RootInner({ children }: PropsWithChildren) {
   //     initDataUser && setLocale(initDataUser.languageCode);
   //   }, [initDataUser]);
 
-  return <AppRoot appearance={isDark ? 'dark' : 'light'}>{children}</AppRoot>;
+  return <AppRoot>{children}</AppRoot>;
 }
 
 export function Root(props: PropsWithChildren) {

@@ -21,29 +21,14 @@ import {
     // Also, configure the package.
     initSDK();
 
-    if (miniApp.mount.isAvailable()) {
-      miniApp.mount();
-    }
-    if (backButton.isSupported()) {
-      backButton.mount()
-    }
-    if (viewport.mount.isAvailable()) {
-      viewport.mount();
-    }
-    if (miniApp.bindCssVars.isAvailable()) {
-      miniApp.bindCssVars();
-    }
-
-
     // Mount all components used in the project.
-    // backButton.isSupported() && backButton.mount();
-    // miniApp.mount();
-     initData.restore();
-    // void viewport.mount().then(() => {
-    //   themeParams.bindCssVars();
-    // }).catch(e => {
-    //   console.error('Something went wrong mounting the viewport', e);
-    // });
-    // viewport.bindCssVars();
-    // miniApp.bindCssVars();
+    backButton.isSupported() && backButton.mount();
+    miniApp.mount();
+    initData.restore();
+    void viewport.mount().then(() => {
+      viewport.bindCssVars();
+      miniApp.bindCssVars();
+    }).catch(e => {
+      console.error('Something went wrong mounting the viewport', e);
+    });
   }
