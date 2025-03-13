@@ -16,8 +16,7 @@ export async function middleware(request: NextRequest) {
     }
 
     const targetUrl = `${externalApiDomain}${url.pathname}${url.search}`;
-
-    console.log(`Proxying request to: ${targetUrl}`);
+    const body = request.body ? JSON.stringify(request.body) : undefined;
 
     try {
       const response = await fetch(targetUrl, {
@@ -27,7 +26,7 @@ export async function middleware(request: NextRequest) {
           "X-CTN": xCtn,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(request.body),
+        body: body,
       });
 
       return new NextResponse(response.body, {
