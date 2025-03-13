@@ -8,6 +8,8 @@ import { getAuthData } from "@/shared/lib/auth";
 export type SbpPayRequest = {
   amount: number;
   createBinding: boolean;
+  bindingId: string | null;
+  hasBonuses: boolean;
 }
 
 export type SbpPayResponse = {
@@ -32,10 +34,7 @@ async function sbpPay(request: SbpPayRequest): Promise<SbpPayResponse> {
   const ctn = authData?.ctn ?? '';
 
   try {
-    const response = await httpClient.post<SbpPayResponse>(`/v2/payment/sbpPay?ctn=${ctn}`, {
-      amount: request.amount,
-      createBinding: request.createBinding,
-    });
+    const response = await httpClient.post<SbpPayResponse>(`/v2/payment/sbpPay?ctn=${ctn}`, request);
     return response.data;
   } catch (error) {
     throw error;

@@ -9,6 +9,8 @@ export default function SbpPage() {
   const { mutateAsync, data, error, isPending, isError, isSuccess } = useSbpPay({
     amount: 10,
     createBinding: false,
+    hasBonuses: false,
+    bindingId: null,
   });
 
   const handleClick = async () => {

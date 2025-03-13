@@ -16,7 +16,15 @@ export async function middleware(request: NextRequest) {
     }
 
     const targetUrl = `${externalApiDomain}${url.pathname}${url.search}`;
+
     const body = request.body ? JSON.stringify(request.body) : undefined;
+
+    console.log('proxy-request', {
+      targetUrl,
+      method: request.method,
+      headers: request.headers,
+      body,
+    })
 
     try {
       const response = await fetch(targetUrl, {
@@ -28,6 +36,8 @@ export async function middleware(request: NextRequest) {
         },
         body: body,
       });
+
+      console.log('proxy-response', response);
 
       return new NextResponse(response.body, {
         status: response.status,
