@@ -18,11 +18,16 @@ export async function middleware(request: NextRequest) {
     const targetUrl = `${externalApiDomain}${url.pathname}${url.search}`;
 
     const body = request.body ? await request.json() : undefined;
+    const headers = {
+      "X-idp-id-token": xIdp,
+      "X-CTN": xCtn,
+      'Content-Type': 'application/json'
+    };
 
     console.log('proxy-request', {
       targetUrl,
       method: request.method,
-      headers: request.headers,
+      headers: headers,
       body,
     });
 

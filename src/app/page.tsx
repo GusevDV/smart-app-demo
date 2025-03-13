@@ -55,15 +55,6 @@ export default function Home() {
     },
   });
 
-  useEffect(() => {
-    requestPhoneAccess().then((d) => {
-      console.log(d);
-    });
-    requestContact().then((contact) => {
-      console.log(contact);
-    });
-  }, []);
-
   const { data, isLoading } = useBalance({
     enabled: isAuth,
   });
