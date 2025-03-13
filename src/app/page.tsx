@@ -149,7 +149,7 @@ export default function Home() {
           <ButtonCell onClick={handleSbpClick}>СБП</ButtonCell>
           <ButtonCell>Внешние сервисы</ButtonCell>
         </Section>
-      </List>{' '}
+      </List>
     </Page>
   );
 }

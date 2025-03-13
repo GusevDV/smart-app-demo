@@ -11,6 +11,7 @@ import { useClientOnce } from '../lib/useClientOnce';
 import { init } from '../lib/init';
 import { useLaunchParams } from '../lib/useLaunchParams';
 
+import '@telegram-apps/telegram-ui/dist/styles.css';
 import './styles.css';
 
 function RootInner({ children }: PropsWithChildren) {
