@@ -12,7 +12,7 @@ const Header = () => {
       <header className="header">
         <div className="text-container">
           <Image alt="" src="/images/beeline_logo.svg" width={36} height={36} />
-          <Text className="text" weight="1">
+          <Text className="text" weight="3">
             Mini App
           </Text>
         </div>

@@ -16,8 +16,6 @@ export default function SbpPage() {
   const handleClick = async () => {
     const response = await mutateAsync();
     response.data;
-    console.log(openLink.isAvailable());
-    console.log(response);
     if (openLink.isAvailable()) {
       openLink(response.data.payLoad);
     }

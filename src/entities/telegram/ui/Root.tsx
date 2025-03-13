@@ -14,8 +14,12 @@ import { useLaunchParams } from '../lib/useLaunchParams';
 import '@telegram-apps/telegram-ui/dist/styles.css';
 import './styles.css';
 
+import { miniApp, useSignal } from '@telegram-apps/sdk-react';
+
 function RootInner({ children }: PropsWithChildren) {
   const isDev = process.env.NODE_ENV === 'development';
+
+  const isDark = useSignal(miniApp.isDark);
 
   // Mock Telegram environment in development mode if needed.
   if (isDev) {
@@ -38,7 +42,7 @@ function RootInner({ children }: PropsWithChildren) {
   //     initDataUser && setLocale(initDataUser.languageCode);
   //   }, [initDataUser]);
 
-  return <AppRoot>{children}</AppRoot>;
+  return <AppRoot appearance={isDark ? 'dark' : 'light'}>{children}</AppRoot>;
 }
 
 export function Root(props: PropsWithChildren) {
