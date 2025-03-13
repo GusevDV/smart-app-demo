@@ -4,12 +4,14 @@ import { type PropsWithChildren } from 'react';
 import { AppRoot } from '@telegram-apps/telegram-ui';
 import { ErrorBoundary } from '@/shared/ui/ErrorBoundary';
 import { ErrorPage } from '@/shared/ui/ErrorPage';
-import { useTelegramMock } from './lib/useTelegramMock';
-import { useDidMount } from './lib/useDidMount';
-import { useClientOnce } from './lib/useClientOnce';
+import { useTelegramMock } from '../lib/useTelegramMock';
+import { useDidMount } from '../lib/useDidMount';
+import { useClientOnce } from '../lib/useClientOnce';
 // import { setLocale } from '@/core/i18n/locale';
-import { init } from './lib/init';
-import { useLaunchParams } from './lib/useLaunchParams';
+import { init } from '../lib/init';
+import { useLaunchParams } from '../lib/useLaunchParams';
+
+import './styles.css';
 
 function RootInner({ children }: PropsWithChildren) {
   const isDev = process.env.NODE_ENV === 'development';

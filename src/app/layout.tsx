@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Root } from '@/entities/telegram/Root';
+import { Root } from '@/entities/telegram/ui/Root';
 import { ReactQueryProvider } from '@/shared/api';
 import './globals.css';
 import '@telegram-apps/telegram-ui/dist/styles.css';

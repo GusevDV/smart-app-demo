@@ -3,7 +3,6 @@
 import {
     backButton,
     viewport,
-    themeParams,
     miniApp,
     initData,
     init as initSDK,
@@ -22,15 +21,29 @@ import {
     // Also, configure the package.
     initSDK();
 
-    // Mount all components used in the project.
-    backButton.isSupported() && backButton.mount();
-    miniApp.mount();
-    initData.restore();
-    void viewport.mount().then(() => {
-      viewport.bindCssVars();
+    if (miniApp.mount.isAvailable()) {
+      miniApp.mount();
+    }
+    if (backButton.isSupported()) {
+      backButton.mount()
+    }
+    if (viewport.mount.isAvailable()) {
+      viewport.mount();
+    }
+    if (miniApp.bindCssVars.isAvailable()) {
       miniApp.bindCssVars();
-      themeParams.bindCssVars();
-    }).catch(e => {
-      console.error('Something went wrong mounting the viewport', e);
-    });
+    }
+
+
+    // Mount all components used in the project.
+    // backButton.isSupported() && backButton.mount();
+    // miniApp.mount();
+     initData.restore();
+    // void viewport.mount().then(() => {
+    //   themeParams.bindCssVars();
+    // }).catch(e => {
+    //   console.error('Something went wrong mounting the viewport', e);
+    // });
+    // viewport.bindCssVars();
+    // miniApp.bindCssVars();
   }

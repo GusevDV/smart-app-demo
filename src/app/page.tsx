@@ -1,14 +1,8 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import {
-  useSignal,
-  initData,
-  type User,
-  requestPhoneAccess,
-  requestContact,
-} from '@telegram-apps/sdk-react';
+import { useSignal, initData, type User } from '@telegram-apps/sdk-react';
 import {
   Placeholder,
   Input,
@@ -129,7 +123,7 @@ export default function Home() {
         header={`Привет, ${initDataState?.user?.first_name}!`}
         description="Это demo mini-app"
       >
-        <Avatar src={initDataState?.user?.photo_url} />
+        <Avatar src={initDataState?.user?.photo_url} width={255} />
       </Placeholder>
       <List
         style={{
