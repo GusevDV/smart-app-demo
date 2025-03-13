@@ -1,6 +1,6 @@
 'use client';
 
-import { openLink } from '@telegram-apps/sdk';
+import { openLink } from '@telegram-apps/sdk-react';
 import { Button, Input } from '@telegram-apps/telegram-ui';
 import { useForm } from 'react-hook-form';
 import { useSbpPay } from '@/shared/api/payment/sbp-pay';
@@ -12,7 +12,7 @@ type Inputs = {
 };
 
 export default function SbpForm() {
-  const { mutateAsync, error: payError, isPending, isError } = useSbpPay();
+  const { mutateAsync, error: payError, isPending } = useSbpPay();
 
   const {
     register,
@@ -25,9 +25,9 @@ export default function SbpForm() {
     },
   });
 
-  const onSubmit = async (value: Inputs) => {
+  const onSubmitForm = async (value: Inputs) => {
     const { amount } = value;
-    console.log(amount);
+
     try {
       const response = await mutateAsync({
         amount: amount,
@@ -35,13 +35,10 @@ export default function SbpForm() {
         bindingId: null,
         hasBonuses: false,
       });
-      response.data;
-      console.log(openLink.isAvailable());
       if (openLink.isAvailable()) {
         openLink(response.data.payLoad);
       }
     } catch {
-      console.log('error');
       setError('amount', {
         type: 'manual',
         message: `Ошибка при оплате ${payError?.message}`,
@@ -49,7 +46,7 @@ export default function SbpForm() {
     }
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmitForm)}>
       <Input header="Сумма" {...register('amount', { min: 0, max: 10000 })} placeholder="10.00" />
       <div className={styles.error_container}>
         <ErrorMessage errors={errors} name="amount" />
