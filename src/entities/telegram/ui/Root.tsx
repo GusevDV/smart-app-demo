@@ -32,7 +32,7 @@ function RootInner({ children }: PropsWithChildren) {
 
   // Initialize the library.
   useClientOnce(() => {
-    init(false);
+    init(debug);
   });
 
   //   const initDataUser = useSignal(initData.user);
@@ -41,7 +41,6 @@ function RootInner({ children }: PropsWithChildren) {
   //   useEffect(() => {
   //     initDataUser && setLocale(initDataUser.languageCode);
   //   }, [initDataUser]);
-
   return <AppRoot>{children}</AppRoot>;
 }
 

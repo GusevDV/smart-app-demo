@@ -5,8 +5,8 @@ body {
 }
 
 body {
-  color: var(--tgui-theme-text-color);
-  background: var(--tgui--bg_color);
+  color: var(--tg-theme-text-color);
+  background: var(--tg-theme-bg-color);
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
