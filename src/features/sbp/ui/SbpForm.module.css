@@ -1,0 +1,7 @@
+.button_container {
+  padding: 20px 22px 16px;
+}
+.error_container {
+  color: var(--tg-theme-destructive-text-color);
+  padding: 0px 22px 0px;
+}

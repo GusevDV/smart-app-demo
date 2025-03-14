@@ -3,7 +3,6 @@
 import {
     backButton,
     viewport,
-    themeParams,
     miniApp,
     initData,
     init as initSDK,
@@ -29,7 +28,6 @@ import {
     void viewport.mount().then(() => {
       viewport.bindCssVars();
       miniApp.bindCssVars();
-      themeParams.bindCssVars();
     }).catch(e => {
       console.error('Something went wrong mounting the viewport', e);
     });

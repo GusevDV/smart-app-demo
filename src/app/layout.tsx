@@ -1,8 +1,9 @@
+'use client';
 import { ReactNode } from 'react';
-import { Root } from '@/entities/telegram/Root';
+import { Root } from '@/entities/telegram/ui/Root';
 import { ReactQueryProvider } from '@/shared/api';
-import './globals.css';
-import '@telegram-apps/telegram-ui/dist/styles.css';
+
+import Header from '@/shared/ui/Header/Header';
 
 export default function RootLayout({
   children,
@@ -13,7 +14,10 @@ export default function RootLayout({
     <html lang="ru">
       <body>
         <ReactQueryProvider>
-          <Root>{children}</Root>
+          <Root>
+            <Header />
+            <div className="container">{children}</div>
+          </Root>
         </ReactQueryProvider>
       </body>
     </html>

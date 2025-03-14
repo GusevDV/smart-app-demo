@@ -4,15 +4,22 @@ import { type PropsWithChildren } from 'react';
 import { AppRoot } from '@telegram-apps/telegram-ui';
 import { ErrorBoundary } from '@/shared/ui/ErrorBoundary';
 import { ErrorPage } from '@/shared/ui/ErrorPage';
-import { useTelegramMock } from './lib/useTelegramMock';
-import { useDidMount } from './lib/useDidMount';
-import { useClientOnce } from './lib/useClientOnce';
+import { useTelegramMock } from '../lib/useTelegramMock';
+import { useDidMount } from '../lib/useDidMount';
+import { useClientOnce } from '../lib/useClientOnce';
 // import { setLocale } from '@/core/i18n/locale';
-import { init } from './lib/init';
-import { useLaunchParams } from './lib/useLaunchParams';
+import { init } from '../lib/init';
+import { useLaunchParams } from '../lib/useLaunchParams';
+
+import '@telegram-apps/telegram-ui/dist/styles.css';
+import './styles.css';
+
+import { miniApp, useSignal } from '@telegram-apps/sdk-react';
 
 function RootInner({ children }: PropsWithChildren) {
   const isDev = process.env.NODE_ENV === 'development';
+
+  const isDark = useSignal(miniApp.isDark);
 
   // Mock Telegram environment in development mode if needed.
   if (isDev) {
@@ -25,7 +32,7 @@ function RootInner({ children }: PropsWithChildren) {
 
   // Initialize the library.
   useClientOnce(() => {
-    init(debug);
+    init(false);
   });
 
   //   const initDataUser = useSignal(initData.user);
