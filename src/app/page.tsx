@@ -1,14 +1,8 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useMemo } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import {
-  useSignal,
-  initData,
-  type User,
-  requestPhoneAccess,
-  requestContact,
-} from '@telegram-apps/sdk-react';
+import { useSignal, initData, type User } from '@telegram-apps/sdk-react';
 import {
   Placeholder,
   Input,
@@ -47,17 +41,13 @@ export default function Home() {
   const initDataRaw = useSignal(initData.raw);
   const initDataState = useSignal(initData.state);
 
-  const [isAuth, setIsAuth] = useState(false);
-
   const { register, handleSubmit } = useForm<Inputs>({
     defaultValues: {
       ctn: typeof window !== 'undefined' ? localStorage.getItem('ctn') || '' : '',
     },
   });
 
-  const { data, isLoading } = useBalance({
-    enabled: isAuth,
-  });
+  const { data, isLoading } = useBalance();
 
   const initDataRows = useMemo(() => {
     if (!initDataState || !initDataRaw) {
@@ -103,7 +93,6 @@ export default function Home() {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     saveAuthData(data);
-    setIsAuth(true);
   };
 
   const handleSbpClick = () => {
@@ -129,7 +118,7 @@ export default function Home() {
         header={`Привет, ${initDataState?.user?.first_name}!`}
         description="Это demo mini-app"
       >
-        <Avatar src={initDataState?.user?.photo_url} />
+        <Avatar src={initDataState?.user?.photo_url} width={255} />
       </Placeholder>
       <List
         style={{
@@ -145,7 +134,11 @@ export default function Home() {
                 {data?.data.balanceValue !== undefined ? `Баланс: ${data?.data.balanceValue}` : ''}
               </Text>
             </div>
-
+            <div style={{ display: 'flex', padding: '0 22px 16px 22px', textAlign: 'left' }}>
+              <Text weight="3">
+                {data?.data.balanceValue !== undefined ? `Баланс: ${data?.data.balanceValue}` : ''}
+              </Text>
+            </div>
             <Button type="submit" loading={isLoading} mode="filled" size="l" stretched>
               Сохранить токен
             </Button>
@@ -155,7 +148,7 @@ export default function Home() {
           <ButtonCell onClick={handleSbpClick}>СБП</ButtonCell>
           <ButtonCell>Внешние сервисы</ButtonCell>
         </Section>
-      </List>{' '}
+      </List>
     </Page>
   );
 }
