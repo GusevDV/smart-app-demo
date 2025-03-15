@@ -1,9 +1,10 @@
 'use client'
 
 import { useMutation } from "@tanstack/react-query";
-import { httpClient } from "../baseQuery";
+import { httpClient } from "../../baseQuery";
 import { AxiosError } from "axios";
 import { getAuthData } from "@/shared/lib/auth";
+import { CommonResponse } from "../../types";
 
 export type SbpPayRequest = {
   amount: number;
@@ -12,21 +13,10 @@ export type SbpPayRequest = {
   hasBonuses: boolean;
 }
 
-export type SbpPayResponse = {
-  data: {
-    payId: string;
-    payLoad: string;
-  },
-  meta: {
-    codeValue: string;
-    errorCode: string | null;
-    status: string;
-    code: number;
-    message: string;
-    cachedAt: string | null;
-    errors: string | null;
-  }
-}
+export type SbpPayResponse = CommonResponse<{
+  payId: string;
+  payLoad: string;
+}>;
 
 async function sbpPay(request: SbpPayRequest): Promise<SbpPayResponse> {
   // TODO удалить после перехода на cookie

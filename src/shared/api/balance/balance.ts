@@ -1,8 +1,8 @@
 import { httpClient } from '../baseQuery'
 import { useQuery } from "@tanstack/react-query";
+import { CommonResponse } from '../types';
 
-export type BalanceResponse = {
-  data: {
+export type BalanceResponse = CommonResponse<{
     paymentType: string;
     balanceValue: number;
     balanceType: string;
@@ -12,17 +12,7 @@ export type BalanceResponse = {
     lastDate: string | null;
     unbilledCharges: string | null;
     isBlocked: boolean;
-  },
-  meta: {
-    codeValue: string;
-    errorCode: string | null;
-    status: string;
-    code: number;
-    message: string;
-    cachedAt: string | null;
-    errors: string | null;
-  }
-}
+}>;
 
 async function fetchBalance() {
   try {
