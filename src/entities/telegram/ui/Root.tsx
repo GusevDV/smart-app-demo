@@ -32,7 +32,7 @@ function RootInner({ children }: PropsWithChildren) {
 
   // Initialize the library.
   useClientOnce(() => {
-    init(debug);
+    init(false);
   });
 
   //   const initDataUser = useSignal(initData.user);

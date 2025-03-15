@@ -3,7 +3,7 @@
 import { openLink } from '@telegram-apps/sdk-react';
 import { Button, Input } from '@telegram-apps/telegram-ui';
 import { useForm } from 'react-hook-form';
-import { useSbpPay } from '@/shared/api/payment/sbpPay/sbp-pay';
+import { useSbpPay } from '@/shared/api/payment';
 import { ErrorMessage } from '@hookform/error-message';
 import styles from './SbpForm.module.css';
 
